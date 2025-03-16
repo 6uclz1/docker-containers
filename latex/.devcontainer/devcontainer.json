@@ -1,0 +1,51 @@
+{
+  "name": "LaTeX",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceFolder": "/workspace",
+  "mounts": [
+    {
+      "source": "${localWorkspaceFolder}",
+      "target": "/workspace",
+      "type": "bind"
+    }
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "James-Yu.latex-workshop"
+      ],
+      "settings": {
+        "latex-workshop.latex.tools": [
+          {
+            "name": "uplatex",
+            "command": "uplatex",
+            "args": [
+              "-interaction=nonstopmode",
+              "-output-directory=out",
+              "%DOC%"
+            ]
+          },
+          {
+            "name": "dvipdfmx",
+            "command": "dvipdfmx",
+            "args": [
+              "-o",
+              "out/%DOCFILE%.pdf",
+              "out/%DOCFILE%.dvi"
+            ]
+          }
+        ],
+        "latex-workshop.latex.recipes": [
+          {
+            "name": "uplatex -> dvipdfmx",
+            "tools": ["uplatex", "dvipdfmx"]
+          }
+        ],
+        "latex-workshop.view.pdf.viewer": "tab",
+        "latex-workshop.latex.autoBuild.run": "onSave"
+      }
+    }
+  }
+}
